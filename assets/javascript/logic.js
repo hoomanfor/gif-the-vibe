@@ -13,14 +13,16 @@ function displayGifs(query) {
         var gifsArr = response.data;
         console.log(gifsArr);
         gifsArr.forEach(function(element){
-            var animatedURL = element.images.fixed_width_small.url;
-            var stillURL = element.images.fixed_width_small_still.url;
+            var gifDiv = $("<div class='col border p-2'>")
+            var animatedURL = element.images.fixed_width.url;
+            var stillURL = element.images.fixed_width_still.url;
             var gifImg = $("<img>");
             gifImg.attr("src", animatedURL);
             gifImg.attr("data-state", "animated");
             gifImg.attr("still-url", stillURL);
             gifImg.attr("animated-url", animatedURL)
-            $("#gifs").append(gifImg);
+            gifDiv.append(gifImg);
+            $("#gifs").append(gifDiv);
         })
     })
 }

@@ -14,18 +14,24 @@
         <!-- Container -->
         <div class="container">
             <!-- Form -->
-            <form>
-                <div class="input-group w-50">
-                    <input type="text" id="new-vibe" class="form-control" placeholder="Add a new Feeling, Emotion, or Vibe &#128526">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="submit" id="add">Add</button>
-                    </div>
+            <div class="row">
+                <div class="col-6">
+                    <form>
+                        <div class="input-group">
+                            <input type="text" id="new-vibe" class="form-control" placeholder="Add a new Feeling, Emotion, or Vibe &#128526">
+                            <button class="btn btn-outline-primary w-25" type="submit" id="add">Add</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
             <!-- Vibe Buttons -->
-            <div id="vibes"></div>
+            <div class="row">
+                <div class="col-12">
+                    <div id="vibes"></div>
+                </div>
+            </div>
             <!-- Gifs -->
-            <div id="gifs"></div>
+            <div class="row" id="gifs"></div>
         </div>
 
         <!-- jQuery -->
