@@ -1,5 +1,5 @@
 
-var vibes = ["Positive", "Grinning", "Beaming", "Joy", "Winking", "Smiling", "Star-Struck", "Zany", "Squinting", "Hugging", "Shushing", "Thinking", "Neutral", "Expressionless", "Smirking", "Unamused", "Relieved", "Pensive", "Sleepy", "Shy", "Partying", "Nerdy", "Confused", "Worried", "Astonished", "Flushed", "Pleading", "Fearful", "Tired", "Evil", "Interested", "Hopeful", "Kindness", "Cheerfulness", "Confidence", "Admiration", "Enthusiasm", "Euphoria", "Satisfaction", "Pride", "Contentment", "Inspired"];
+var vibes = ["Positive", "Happy", "Artistic", "Beaming", "Joyful", "Winking", "Smiling", "Star-Struck", "Zany", "Squinting", "Hugging", "Shushing", "Thinking", "Neutral", "Expressionless", "Smirking", "Unamused", "Relieved", "Sleepy", "Shy", "Partying", "Nerdy", "Confused", "Worried", "Astonished", "Flushed", "Pleading", "Fearful", "Tired", "Evil", "Interested", "Hopeful", "Kindness", "Cheerfulness", "Confidence", "Admiration", "Enthusiasm", "Satisfaction", "Inspired"];
 
 var key = "1hpEc8I1eklOKDKC885JqonMveeNVSS3";
 var offset = 0;
@@ -25,11 +25,15 @@ function displayGifs(query) {
     })
 }
 
-vibes.forEach(function(element) {
-    var vibeBtn = $("<button type='button' class='btn btn-primary m-1'>");
-    vibeBtn.text(element);
-    $("#vibes").append(vibeBtn);
-})
+function displayVibes() {
+    $("#vibes").empty();
+    vibes.forEach(function(element) {
+        var vibeBtn = $("<button type='button' class='btn btn-primary m-1'>");
+        vibeBtn.text(element);
+        $("#vibes").append(vibeBtn);
+    });
+}
+displayVibes()
 
 $(document).on("click", "button[type|='button']", function(event) {
     $("#gifs").empty();
@@ -42,7 +46,7 @@ $(document).on("click", "button[type|='button']", function(event) {
         }
     var query = "https://api.giphy.com/v1/gifs/search?q=" + vibeText + "&limit=10&offset=" + offset + "&api_key=" + key;
     displayGifs(query)
-})
+});
 
 $(document).on("click", "img", function(event) {
     var state = $(this).data("state");
@@ -56,6 +60,15 @@ $(document).on("click", "img", function(event) {
         $(this).data("state", "animated")
         $(this).attr("src", animated);
     }
+});
+
+$(document).on("click", "#add", function(event) {
+    event.preventDefault();
+    var newVibe = $("#new-vibe").val().trim();
+    $("#new-vibe").val("")
+    console.log(newVibe);
+    vibes.push(newVibe);
+    displayVibes()
 });
 
 
