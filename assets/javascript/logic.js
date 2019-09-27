@@ -13,9 +13,13 @@ function displayGifs(query) {
         var gifsArr = response.data;
         console.log(gifsArr);
         gifsArr.forEach(function(element){
-            var gifURL = element.images.fixed_width_small.url;
+            var animatedURL = element.images.fixed_width_small.url;
+            var stillURL = element.images.fixed_width_small_still.url;
             var gifImg = $("<img>");
-            gifImg.attr("src", gifURL);
+            gifImg.attr("src", animatedURL);
+            gifImg.attr("data-state", "animated");
+            gifImg.attr("still-url", stillURL);
+            gifImg.attr("animated-url", animatedURL)
             $("#gifs").append(gifImg);
         })
     })
@@ -39,5 +43,19 @@ $(document).on("click", "button[type|='button']", function(event) {
     var query = "https://api.giphy.com/v1/gifs/search?q=" + vibeText + "&limit=10&offset=" + offset + "&api_key=" + key;
     displayGifs(query)
 })
+
+$(document).on("click", "img", function(event) {
+    var state = $(this).data("state");
+    var still = $(this).attr("still-url")
+    var animated = $(this).attr("animated-url")
+    if (state === "animated") {
+        $(this).data("state", "still")
+        $(this).attr("src", still);
+    }
+    if (state === "still") {
+        $(this).data("state", "animated")
+        $(this).attr("src", animated);
+    }
+});
 
 
