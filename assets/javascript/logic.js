@@ -1,5 +1,5 @@
 
-var vibes = ["Positive", "Happy", "Artistic", "Beaming", "Joyful", "Winking", "Smiling", "Star-Struck", "Zany", "Squinting", "Hugging", "Shushing", "Thinking", "Neutral", "Expressionless", "Smirking", "Unamused", "Relieved", "Sleepy", "Shy", "Partying", "Nerdy", "Confused", "Worried", "Astonished", "Flushed", "Pleading", "Fearful", "Tired", "Evil", "Interested", "Hopeful", "Kindness", "Cheerfulness", "Confidence", "Admiration", "Enthusiasm", "Satisfaction", "Inspired"];
+var vibes = ["Positive", "Happy", "Artistic", "Beaming", "Joyful", "Winking", "Smiling", "Star-Struck", "Zany", "Squinting", "Hugging", "Shushing", "Thinking", "Neutral", "Expressionless", "Smirking", "Unamused", "Relieved", "Sleepy", "Shy", "Partying", "Nerdy", "Confused", "Worried", "Astonished", "Flushed", "Fear", "Tired", "Evil", "Interested", "Hopeful", "Kindness", "Cheerfulness", "Confidence", "Admiration", "Enthusiasm", "Satisfaction", "Inspired"];
 
 var key = "1hpEc8I1eklOKDKC885JqonMveeNVSS3";
 var offset = 0;
@@ -13,16 +13,20 @@ function displayGifs(query) {
         var gifsArr = response.data;
         console.log(gifsArr);
         gifsArr.forEach(function(element){
-            var gifDiv = $("<div class='col border p-2'>")
+            var gifDiv = $("<div class='col border p-2 text-center'>")
             var animatedURL = element.images.fixed_width.url;
             var stillURL = element.images.fixed_width_still.url;
+            var title = element.title;
+            var titleP = $("<p>");
+            titleP.text(title);
+            console.log(title);
             var gifImg = $("<img>");
             gifImg.attr("src", animatedURL);
             gifImg.attr("data-state", "animated");
             gifImg.attr("still-url", stillURL);
-            gifImg.attr("animated-url", animatedURL)
-            gifDiv.append(gifImg);
-            $("#gifs").append(gifDiv);
+            gifImg.attr("animated-url", animatedURL);
+            gifDiv.append(gifImg, titleP);
+            $("#gifs").prepend(gifDiv);
         })
     })
 }
@@ -38,7 +42,7 @@ function displayVibes() {
 displayVibes()
 
 $(document).on("click", "button[type|='button']", function(event) {
-    $("#gifs").empty();
+    // $("#gifs").empty();
     var vibeText = $(this).text();
         if (priorVibe === vibeText) {
             offset += 10;
