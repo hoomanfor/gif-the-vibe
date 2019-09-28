@@ -4,8 +4,10 @@ var vibes = ["Positive", "Happy", "Artistic", "Beaming", "Joyful", "Winking", "S
 var key = "1hpEc8I1eklOKDKC885JqonMveeNVSS3";
 var offset = 0;
 priorVibe = "";
+var favorites = [];
 
 function displayGifs(query) {
+    $("#gifs").removeClass("d-none");
     $.ajax({
         url: query,
         method: "GET"
@@ -16,16 +18,21 @@ function displayGifs(query) {
             var gifDiv = $("<div class='col border p-2 text-center'>")
             var animatedURL = element.images.fixed_width.url;
             var stillURL = element.images.fixed_width_still.url;
+            var srcURL = element.images.original.url;
+            console.log(srcURL);
             var title = element.title;
-            var titleP = $("<p>");
-            titleP.text(title);
-            console.log(title);
+            var titleP = $("<p class='m-0'>");
+            titleP.html(title);
+            var favBtn = $('<button type="button" class="btn btn-secondary m-1" id="favorite-btn">');
+            favBtn.attr("animated-url", animatedURL);
+            favBtn.attr("src-url", srcURL);
+            favBtn.text("Add to Favorites")
             var gifImg = $("<img>");
             gifImg.attr("src", animatedURL);
             gifImg.attr("data-state", "animated");
             gifImg.attr("still-url", stillURL);
             gifImg.attr("animated-url", animatedURL);
-            gifDiv.append(gifImg, titleP);
+            gifDiv.append(gifImg, titleP, favBtn);
             $("#gifs").prepend(gifDiv);
         })
     })
@@ -34,14 +41,14 @@ function displayGifs(query) {
 function displayVibes() {
     $("#vibes").empty();
     vibes.forEach(function(element) {
-        var vibeBtn = $("<button type='button' class='btn btn-primary m-1'>");
+        var vibeBtn = $("<button type='button' id='vibe-btn' class='btn btn-primary m-1'>");
         vibeBtn.text(element);
         $("#vibes").append(vibeBtn);
     });
 }
 displayVibes()
 
-$(document).on("click", "button[type|='button']", function(event) {
+$(document).on("click", "#vibe-btn", function(event) {
     // $("#gifs").empty();
     var vibeText = $(this).text();
         if (priorVibe === vibeText) {
@@ -75,6 +82,25 @@ $(document).on("click", "#add", function(event) {
     console.log(newVibe);
     vibes.push(newVibe);
     displayVibes()
+});
+
+$(document).on("click", "#favorite-btn", function(event) {
+    $(this).removeClass("btn-secondary");
+    $(this).text("Added");
+    $(this).addClass("btn-success");
+    $(this).attr("disabled", "true");
+    var fObject = {
+        animated_url: $(this).attr("animated-url"),
+        src_url: $(this).attr("src-url")
+    }
+    favorites.push(fObject);
+    $("#fav-count").text(favorites.length);
+
+    console.log(favorites);
+});
+
+$(document).on("click", "#view-favorites", function(event) {
+    $("#gifs").addClass("d-none");
 });
 
 
