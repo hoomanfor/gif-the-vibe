@@ -27,8 +27,8 @@ function displayGifs(query) {
             favBtn.attr("title", title);
             favBtn.text("Add to Favorites")
             var gifImg = $("<img class='gifs'>");
-            gifImg.attr("src", animatedURL);
-            gifImg.attr("data-state", "animated");
+            gifImg.attr("src", stillURL);
+            gifImg.attr("data-state", "still");
             gifImg.attr("still-url", stillURL);
             gifImg.attr("animated-url", animatedURL);
             gifDiv.append(favBtn, gifImg, titleP, );
