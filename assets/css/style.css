@@ -3,7 +3,18 @@
     font-size: 1.4rem;
 }
 
+p {
+    font-family: 'Turret Road', cursive;
+}
 
+.instruction {
+    font-family: 'Press Start 2P', cursive;
+    font-size: .7rem;
+}
+
+.gifs {
+    cursor: pointer; 
+}
 
 
 /* ----

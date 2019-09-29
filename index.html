@@ -15,13 +15,12 @@
     <body class="bg-light">
         <!-- Container -->
         <div class="container">
-            <!-- Header -->
+            <!-- Nav -->
             <div class="row bg-dark no-gutters align-items-end">
                 <div class="col">
                     <img src="https://media.giphy.com/media/2WithLZs98qLmfx1I4/giphy.gif" width="75px">
                     <h1 class="header-text d-inline-block text-light align-bottom">gif the vibe</h1>
                 </div>
-
                 <div class="col">
                     <button class="btn btn-success float-right rounded-0" type="button" id="view-favorites">Favorites <span class="badge badge-light" id="fav-count">0</span></button>
                     <form>
@@ -33,20 +32,23 @@
                         </div>
                     </form>
                 </div>
-
             </div>
             <!-- Vibe Buttons -->
-            <div class="row bg-secondary no-gutters">
+            <div class="row bg-secondary border-bottom border-right border-left border-dark no-gutters">
                 <div class="col-12">
                     <div id="vibes"></div>
                 </div>
             </div>
+            <!-- Instruction -->
+            <div class="row no-gutters bg-success border-bottom border-right border-left border-dark align-items-end justify-content-end d-none" id="instruction">
+                <span class='text-white instruction'>click on gifs to turn animation on or off</span>
+                <img src="https://media.giphy.com/media/dZ4CJVDCwy0XRde4uV/giphy.gif" width="30px">
+            </div>
             <!-- Gifs -->
-            <div class="row border no-gutters" id="gifs"></div>
-            <!-- Gifs -->
-            <div class="row border no-gutters" id="favorites"></div>
+            <div class="row no-gutters bg-dark" id="gifs"></div>
+            <!-- Favorites -->
+            <div class="row no-gutters bg-dark" id="favorites"></div>
         </div>
-
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <!-- Logic -->

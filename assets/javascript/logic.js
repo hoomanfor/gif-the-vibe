@@ -15,18 +15,18 @@ function displayGifs(query) {
         var gifsArr = response.data;
         console.log(gifsArr);
         gifsArr.forEach(function(element){
-            var gifDiv = $("<div class='col p-1 text-center border'>")
+            var gifDiv = $("<div class='col p-1 text-center border-bottom border-right border-left border-secondary'>")
             var animatedURL = element.images.fixed_width.url;
             var stillURL = element.images.fixed_width_still.url;
             var srcURL = element.images.original.url;
             var title = element.title;
-            var titleP = $("<p class='m-0'>");
+            var titleP = $("<p class='m-0 text-light'>");
             titleP.html(title);
             var favBtn = $('<button type="button" class="btn btn-secondary btn-sm m-1" id="favorite-btn">');
             favBtn.attr("animated-url", animatedURL);
             favBtn.attr("title", title);
             favBtn.text("Add to Favorites")
-            var gifImg = $("<img>");
+            var gifImg = $("<img class='gifs'>");
             gifImg.attr("src", animatedURL);
             gifImg.attr("data-state", "animated");
             gifImg.attr("still-url", stillURL);
@@ -48,7 +48,7 @@ function displayVibes() {
 displayVibes()
 
 $(document).on("click", "#vibe-btn", function(event) {
-    // $("#gifs").empty();
+    $("#instruction").removeClass("d-none");
     var vibeText = $(this).text();
         if (priorVibe === vibeText) {
             offset += 10;
@@ -100,12 +100,12 @@ $(document).on("click", "#favorite-btn", function(event) {
 $(document).on("click", "#view-favorites", function(event) {
     $("#gifs").addClass("d-none");
     favorites.forEach(function(element) {
-        var gifDiv = $("<div class='col p-1 text-center border'>");
+        var gifDiv = $("<div class='col p-1 text-center border-bottom border-right border-left border-secondary'>");
         var animatedURL = element.animated_url;
         var title = element.title;
-        var gifImg = $("<img>");
+        var gifImg = $("<img class='gifs'>");
         gifImg.attr("src", animatedURL);
-        var titleP = $("<p class='m-0'>");
+        var titleP = $("<p class='m-0 text-light'>");
         titleP.html(title);
         gifDiv.append(gifImg, titleP);
         $("#favorites").append(gifDiv);
