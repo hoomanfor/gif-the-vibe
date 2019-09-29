@@ -1,5 +1,5 @@
 
-var vibes = ["Positive", "Happy", "Artistic", "Beaming", "Joyful", "Winking", "Smiling", "Star-Struck", "Zany", "Squinting", "Hugging", "Shushing", "Thinking", "Neutral", "Expressionless", "Smirking", "Unamused", "Relieved", "Sleepy", "Shy", "Partying", "Nerdy", "Confused", "Worried", "Astonished", "Flushed", "Fear", "Tired", "Evil", "Interested", "Hopeful", "Kindness", "Cheerfulness", "Confidence", "Admiration", "Enthusiasm", "Satisfaction", "Inspired"];
+var vibes = ["Positive", "Grateful", "Happy", "Negative", "Motivated", "Excited", "Weird", "Enthusiastic", "Inspired", "Relieved", "Sleepy", "Confused", "Worried", "Astonished", "Flushed", "Tired", "Interested", "Hopeful", "Cheerful", "Confident"];
 
 var key = "1hpEc8I1eklOKDKC885JqonMveeNVSS3";
 var offset = 0;
@@ -15,24 +15,23 @@ function displayGifs(query) {
         var gifsArr = response.data;
         console.log(gifsArr);
         gifsArr.forEach(function(element){
-            var gifDiv = $("<div class='col border p-2 text-center'>")
+            var gifDiv = $("<div class='col p-1 text-center border'>")
             var animatedURL = element.images.fixed_width.url;
             var stillURL = element.images.fixed_width_still.url;
             var srcURL = element.images.original.url;
-            console.log(srcURL);
             var title = element.title;
             var titleP = $("<p class='m-0'>");
             titleP.html(title);
-            var favBtn = $('<button type="button" class="btn btn-secondary m-1" id="favorite-btn">');
+            var favBtn = $('<button type="button" class="btn btn-secondary btn-sm m-1" id="favorite-btn">');
             favBtn.attr("animated-url", animatedURL);
-            favBtn.attr("src-url", srcURL);
+            favBtn.attr("title", title);
             favBtn.text("Add to Favorites")
             var gifImg = $("<img>");
             gifImg.attr("src", animatedURL);
             gifImg.attr("data-state", "animated");
             gifImg.attr("still-url", stillURL);
             gifImg.attr("animated-url", animatedURL);
-            gifDiv.append(gifImg, titleP, favBtn);
+            gifDiv.append(favBtn, gifImg, titleP, );
             $("#gifs").prepend(gifDiv);
         })
     })
@@ -91,16 +90,26 @@ $(document).on("click", "#favorite-btn", function(event) {
     $(this).attr("disabled", "true");
     var fObject = {
         animated_url: $(this).attr("animated-url"),
-        src_url: $(this).attr("src-url")
+        title: $(this).attr("title")
     }
     favorites.push(fObject);
     $("#fav-count").text(favorites.length);
-
     console.log(favorites);
 });
 
 $(document).on("click", "#view-favorites", function(event) {
     $("#gifs").addClass("d-none");
+    favorites.forEach(function(element) {
+        var gifDiv = $("<div class='col p-1 text-center border'>");
+        var animatedURL = element.animated_url;
+        var title = element.title;
+        var gifImg = $("<img>");
+        gifImg.attr("src", animatedURL);
+        var titleP = $("<p class='m-0'>");
+        titleP.html(title);
+        gifDiv.append(gifImg, titleP);
+        $("#favorites").append(gifDiv);
+    }); 
 });
 
 

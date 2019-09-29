@@ -8,30 +8,43 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Notable|Press+Start+2P|Squada+One|Turret+Road&display=swap" rel="stylesheet">
         <title>Gif the Vibe</title>
     </head>
-    <body>
+    <body class="bg-light">
         <!-- Container -->
         <div class="container">
-            <!-- Form -->
-            <div class="row">
-                <div class="col-6">
+            <!-- Header -->
+            <div class="row bg-dark no-gutters align-items-end">
+                <div class="col">
+                    <img src="https://media.giphy.com/media/2WithLZs98qLmfx1I4/giphy.gif" width="75px">
+                    <h1 class="header-text d-inline-block text-light align-bottom">gif the vibe</h1>
+                </div>
+
+                <div class="col">
+                    <button class="btn btn-success float-right rounded-0" type="button" id="view-favorites">Favorites <span class="badge badge-light" id="fav-count">0</span></button>
                     <form>
                         <div class="input-group">
-                            <input type="text" id="new-vibe" class="form-control" placeholder="Add a new Feeling, Emotion, or Vibe &#128526">
-                            <button class="btn btn-outline-primary w-25" type="submit" id="add">Add</button>
+                            <input type="text" id="new-vibe" class="form-control" placeholder="Add a new Feeling, Emotion, or Vibe">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary rounded-0" type="submit" id="add">Add</button>
+                            </div>
                         </div>
                     </form>
                 </div>
+
             </div>
             <!-- Vibe Buttons -->
-            <div class="row">
+            <div class="row bg-secondary no-gutters">
                 <div class="col-12">
                     <div id="vibes"></div>
                 </div>
             </div>
             <!-- Gifs -->
-            <div class="row" id="gifs"></div>
+            <div class="row border no-gutters" id="gifs"></div>
+            <!-- Gifs -->
+            <div class="row border no-gutters" id="favorites"></div>
         </div>
 
         <!-- jQuery -->
