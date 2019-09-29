@@ -99,6 +99,7 @@ $(document).on("click", "#favorite-btn", function(event) {
 
 $(document).on("click", "#view-favorites", function(event) {
     $("#gifs").addClass("d-none");
+    $("#instruction").addClass("d-none");
     favorites.forEach(function(element) {
         var gifDiv = $("<div class='col p-1 text-center border-bottom border-right border-left border-secondary'>");
         var animatedURL = element.animated_url;
